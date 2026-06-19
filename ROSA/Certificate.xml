@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Certificates>
+  <UserCertificate>
+    <UserName>Иван Иванов</UserName>
+    <Certificate>2-НДФЛ</Certificate>
+    <Quantity>5</Quantity>
+    <Reason>Плановая проверка</Reason>
+    <Status>Создан</Status>
+  </UserCertificate>
+  <UserCertificate>
+    <UserName>паша</UserName>
+    <Certificate>2-НДФЛ</Certificate>
+    <Quantity>2</Quantity>
+    <Reason>пмва</Reason>
+    <Status>Создан</Status>
+  </UserCertificate>
+  <UserCertificate>
+    <UserName>fd</UserName>
+    <Certificate>Средний заработок</Certificate>
+    <Quantity>2</Quantity>
+    <Reason>ff</Reason>
+    <Status>Создан</Status>
+  </UserCertificate>
+  <UserCertificate>
+    <UserName>fddd</UserName>
+    <Certificate>Средний заработок</Certificate>
+    <Quantity>2</Quantity>
+    <Reason>vvfvf</Reason>
+    <Status>Создан</Status>
+  </UserCertificate>
+  <UserCertificate>
+    <UserName>ff</UserName>
+    <Certificate>Средний заработок</Certificate>
+    <Quantity>2</Quantity>
+    <Reason>ff</Reason>
+    <Status>Создан</Status>
+  </UserCertificate>
+  <UserCertificate>
+    <UserName>eee</UserName>
+    <Certificate>Место работы</Certificate>
+    <Quantity>2</Quantity>
+    <Reason>eee</Reason>
+    <Status>Создан</Status>
+  </UserCertificate>
+  <UserCertificate>
+	<UserName>Иван Иванов</UserName>
+	<Certificate>ЗП</Certificate>
+	<Quantity>6</Quantity>
+	<Reason>Плановая проверка</Reason>
+	<Status>Создан</Status>
+  </UserCertificate>	
+</Certificates>
