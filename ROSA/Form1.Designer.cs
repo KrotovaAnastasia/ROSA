@@ -43,13 +43,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.buttonOpenTable = new System.Windows.Forms.Button();
             this.tableEmployee = new System.Windows.Forms.DataGridView();
+            this.radioButtonEmployee = new System.Windows.Forms.RadioButton();
+            this.radioButtonAccountant = new System.Windows.Forms.RadioButton();
+            this.buttonUpdateDate = new System.Windows.Forms.Button();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Certificate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Reason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.radioButtonEmployee = new System.Windows.Forms.RadioButton();
-            this.radioButtonAccountant = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountCertificate)).BeginInit();
             this.groupBoxEmployee.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableEmployee)).BeginInit();
@@ -152,7 +153,7 @@
             "Другое"});
             this.listBoxNameCertificate.Location = new System.Drawing.Point(6, 105);
             this.listBoxNameCertificate.Name = "listBoxNameCertificate";
-            this.listBoxNameCertificate.Size = new System.Drawing.Size(120, 84);
+            this.listBoxNameCertificate.Size = new System.Drawing.Size(198, 84);
             this.listBoxNameCertificate.TabIndex = 16;
             this.listBoxNameCertificate.SelectedIndexChanged += new System.EventHandler(this.ListBoxNameCertificate_SelectedIndexChanged);
             // 
@@ -222,54 +223,8 @@
             this.tableEmployee.Name = "tableEmployee";
             this.tableEmployee.RowHeadersWidth = 51;
             this.tableEmployee.RowTemplate.Height = 24;
-            this.tableEmployee.Size = new System.Drawing.Size(679, 424);
+            this.tableEmployee.Size = new System.Drawing.Size(799, 424);
             this.tableEmployee.TabIndex = 19;
-            // 
-            // UserName
-            // 
-            this.UserName.HeaderText = "ФИО";
-            this.UserName.MinimumWidth = 6;
-            this.UserName.Name = "UserName";
-            this.UserName.ReadOnly = true;
-            this.UserName.Width = 125;
-            // 
-            // Certificate
-            // 
-            this.Certificate.HeaderText = "Вид справки";
-            this.Certificate.MinimumWidth = 6;
-            this.Certificate.Name = "Certificate";
-            this.Certificate.ReadOnly = true;
-            this.Certificate.Width = 125;
-            // 
-            // Quantity
-            // 
-            this.Quantity.HeaderText = "Колличество";
-            this.Quantity.MinimumWidth = 6;
-            this.Quantity.Name = "Quantity";
-            this.Quantity.ReadOnly = true;
-            this.Quantity.Width = 125;
-            // 
-            // Reason
-            // 
-            this.Reason.HeaderText = "Причина";
-            this.Reason.MinimumWidth = 6;
-            this.Reason.Name = "Reason";
-            this.Reason.ReadOnly = true;
-            this.Reason.Width = 125;
-            // 
-            // Status
-            // 
-            this.Status.HeaderText = "Статус";
-            this.Status.Items.AddRange(new object[] {
-            "Создан",
-            "В работе",
-            "Готов",
-            "Закрыт"});
-            this.Status.MinimumWidth = 6;
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
-            this.Status.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Status.Width = 125;
             // 
             // radioButtonEmployee
             // 
@@ -295,11 +250,66 @@
             this.radioButtonAccountant.UseVisualStyleBackColor = true;
             this.radioButtonAccountant.Click += new System.EventHandler(this.RadioButtonAccountant_Click);
             // 
+            // buttonUpdateDate
+            // 
+            this.buttonUpdateDate.Location = new System.Drawing.Point(70, 82);
+            this.buttonUpdateDate.Name = "buttonUpdateDate";
+            this.buttonUpdateDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.buttonUpdateDate.Size = new System.Drawing.Size(169, 23);
+            this.buttonUpdateDate.TabIndex = 20;
+            this.buttonUpdateDate.Text = "Сохранить изменения";
+            this.buttonUpdateDate.UseVisualStyleBackColor = true;
+            this.buttonUpdateDate.Visible = false;
+            this.buttonUpdateDate.Click += new System.EventHandler(this.ButtonUpdateDate_Click);
+            // 
+            // UserName
+            // 
+            this.UserName.HeaderText = "ФИО";
+            this.UserName.MinimumWidth = 6;
+            this.UserName.Name = "UserName";
+            this.UserName.Width = 125;
+            // 
+            // Certificate
+            // 
+            this.Certificate.HeaderText = "Вид справки";
+            this.Certificate.MinimumWidth = 6;
+            this.Certificate.Name = "Certificate";
+            this.Certificate.Width = 125;
+            // 
+            // Quantity
+            // 
+            this.Quantity.HeaderText = "Колличество";
+            this.Quantity.MinimumWidth = 6;
+            this.Quantity.Name = "Quantity";
+            this.Quantity.Width = 125;
+            // 
+            // Reason
+            // 
+            this.Reason.HeaderText = "Причина";
+            this.Reason.MinimumWidth = 6;
+            this.Reason.Name = "Reason";
+            this.Reason.Width = 125;
+            // 
+            // Status
+            // 
+            this.Status.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.Status.HeaderText = "Статус";
+            this.Status.Items.AddRange(new object[] {
+            "Создан",
+            "В работе",
+            "Готов",
+            "Закрыт"});
+            this.Status.MinimumWidth = 6;
+            this.Status.Name = "Status";
+            this.Status.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Status.Width = 125;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1023, 557);
+            this.ClientSize = new System.Drawing.Size(1169, 557);
+            this.Controls.Add(this.buttonUpdateDate);
             this.Controls.Add(this.radioButtonAccountant);
             this.Controls.Add(this.radioButtonEmployee);
             this.Controls.Add(this.tableEmployee);
@@ -332,14 +342,15 @@
         private System.Windows.Forms.GroupBox groupBoxEmployee;
         private System.Windows.Forms.DataGridView tableEmployee;
         private System.Windows.Forms.Button buttonOpenTable;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RadioButton radioButtonEmployee;
+        private System.Windows.Forms.RadioButton radioButtonAccountant;
+        private System.Windows.Forms.Button buttonUpdateDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Certificate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reason;
         private System.Windows.Forms.DataGridViewComboBoxColumn Status;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.RadioButton radioButtonEmployee;
-        private System.Windows.Forms.RadioButton radioButtonAccountant;
     }
 }
 

@@ -25,22 +25,24 @@ namespace ROSA
         string Load = "C:\\Users\\anast\\Desktop\\тестовое задание\\ROSA\\ROSA\\Certificate.xml";
         public void AddCertificate() //Запись данных сотрудника в xml
         {
-            
+
             XDocument doc = XDocument.Load(Load);
-            XElement root = doc.Element("Certificates");
-            root.Add(new XElement("UserCertificate",
-                new XElement("UserName", textBoxNameUser.Text),
-                new XElement("Certificate", listBoxNameCertificate.Text),
-                new XElement("Quantity", numericUpDownCountCertificate.Text),
-                new XElement("Reason", textBoxReason.Text),
-                new XElement("Status", "Создан")));
+            XElement root = doc.Element("UserCertificates");
+            root = SelectAdd(root, textBoxNameUser.Text, listBoxNameCertificate.Text, 
+                numericUpDownCountCertificate.Text, textBoxReason.Text, "Создан");
+            //root.Add(new XElement("UserCertificate",
+            //    new XElement("UserName", textBoxNameUser.Text),
+            //    new XElement("Certificate", listBoxNameCertificate.Text),
+            //    new XElement("Quantity", numericUpDownCountCertificate.Text),
+            //    new XElement("Reason", textBoxReason.Text),
+            //    new XElement("Status", "Создан")));
             doc.Save(Load);
             FillTable();
         }
 
         public void FillTable() //заполнение таблицы
         {
-            XDocument doc = XDocument.Load (Load);
+            XDocument doc = XDocument.Load(Load);
             tableEmployee.Rows.Clear();
             var certificates = from r in doc.Descendants("UserCertificate")
                                select new
@@ -58,8 +60,47 @@ namespace ROSA
                         tableEmployee.Rows.Add(cert.UserName, cert.Certificate, cert.Quantity, cert.Reason, cert.Status);
                 if (radioButtonAccountant.Checked)
                     tableEmployee.Rows.Add(cert.UserName, cert.Certificate, cert.Quantity, cert.Reason, cert.Status);
-            }    
-                
+            }
+
+        }
+
+        public void UpdateData()
+        {
+            
+            XElement root = new XElement("UserCertificates");
+
+            foreach (DataGridViewRow row in tableEmployee.Rows)
+            {
+                if (row.IsNewRow) continue;
+                string name = row.Cells["UserName"].Value.ToString();
+                string reference = row.Cells["Certificate"].Value.ToString();
+                string quantity = row.Cells["Quantity"].Value.ToString();
+                string reason = row.Cells["Reason"].Value.ToString();
+                string status = row.Cells["Status"].Value.ToString();
+
+                root = SelectAdd(root, name, reference, quantity, reason, status);
+                //root.Add(new XElement("UserCertificate",
+                //    new XElement("UserName", name),
+                //    new XElement("Certificate", сertificate),
+                //    new XElement("Quantity", quantity),
+                //    new XElement("Reason", reason),
+                //    new XElement("Status", status)));
+            }
+            XDocument doc = new XDocument(root);
+            doc.Save(Load);
+        }
+
+        //Запись в xml
+        public XElement SelectAdd(XElement root, string name, string сertificate,
+            string quantity, string reason, string status)
+        {
+            root.Add(new XElement("UserCertificate",
+                    new XElement("UserName", name),
+                    new XElement("Certificate", сertificate),
+                    new XElement("Quantity", quantity),
+                    new XElement("Reason", reason),
+                    new XElement("Status", status)));
+            return root;
         }
 
         private void ButtonRequest_Click(object sender, EventArgs e) //Кнопка отправки запроса
@@ -98,6 +139,7 @@ namespace ROSA
             groupBoxEmployee.Visible = true;
             tableEmployee.ReadOnly = true;
             tableEmployee.Visible = true;
+            buttonUpdateDate.Visible = false;
         }
 
         private void RadioButtonAccountant_Click(object sender, EventArgs e)
@@ -105,7 +147,13 @@ namespace ROSA
             groupBoxEmployee.Visible = false;
             tableEmployee.ReadOnly = false;
             tableEmployee.Visible = true;
+            buttonUpdateDate.Visible = true;
             FillTable();
+        }
+
+        private void ButtonUpdateDate_Click(object sender, EventArgs e)
+        {
+            UpdateData();
         }
     }
 }
