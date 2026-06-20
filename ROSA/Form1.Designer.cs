@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonHelp = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxNameUser = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,33 +41,24 @@
             this.groupBoxEmployee = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.buttonOpenTable = new System.Windows.Forms.Button();
-            this.tableEmployee = new System.Windows.Forms.DataGridView();
-            this.radioButtonEmployee = new System.Windows.Forms.RadioButton();
-            this.radioButtonAccountant = new System.Windows.Forms.RadioButton();
-            this.buttonUpdateDate = new System.Windows.Forms.Button();
+            this.tableCertificate = new System.Windows.Forms.DataGridView();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Certificate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Reason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.radioButtonEmployee = new System.Windows.Forms.RadioButton();
+            this.radioButtonAccountant = new System.Windows.Forms.RadioButton();
+            this.buttonUpdateDate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountCertificate)).BeginInit();
             this.groupBoxEmployee.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tableEmployee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableCertificate)).BeginInit();
             this.SuspendLayout();
-            // 
-            // buttonHelp
-            // 
-            this.buttonHelp.Location = new System.Drawing.Point(936, 9);
-            this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(75, 23);
-            this.buttonHelp.TabIndex = 2;
-            this.buttonHelp.Text = "Справка";
-            this.buttonHelp.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 28);
+            this.label1.Location = new System.Drawing.Point(15, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(126, 16);
             this.label1.TabIndex = 3;
@@ -112,6 +102,11 @@
             // numericUpDownCountCertificate
             // 
             this.numericUpDownCountCertificate.Location = new System.Drawing.Point(6, 238);
+            this.numericUpDownCountCertificate.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.numericUpDownCountCertificate.Minimum = new decimal(new int[] {
             1,
             0,
@@ -181,7 +176,7 @@
             this.groupBoxEmployee.Controls.Add(this.numericUpDownCountCertificate);
             this.groupBoxEmployee.Location = new System.Drawing.Point(12, 99);
             this.groupBoxEmployee.Name = "groupBoxEmployee";
-            this.groupBoxEmployee.Size = new System.Drawing.Size(297, 409);
+            this.groupBoxEmployee.Size = new System.Drawing.Size(321, 409);
             this.groupBoxEmployee.TabIndex = 18;
             this.groupBoxEmployee.TabStop = false;
             // 
@@ -199,71 +194,36 @@
             this.buttonOpenTable.Cursor = System.Windows.Forms.Cursors.Default;
             this.buttonOpenTable.Location = new System.Drawing.Point(210, 40);
             this.buttonOpenTable.Name = "buttonOpenTable";
-            this.buttonOpenTable.Size = new System.Drawing.Size(81, 42);
+            this.buttonOpenTable.Size = new System.Drawing.Size(105, 42);
             this.buttonOpenTable.TabIndex = 18;
             this.buttonOpenTable.Text = "Смотреть \r\nзапросы";
             this.buttonOpenTable.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.buttonOpenTable.UseVisualStyleBackColor = true;
             this.buttonOpenTable.Click += new System.EventHandler(this.ButtonOpenTable_Click);
             // 
-            // tableEmployee
+            // tableCertificate
             // 
-            this.tableEmployee.AllowUserToAddRows = false;
-            this.tableEmployee.AllowUserToDeleteRows = false;
-            this.tableEmployee.AllowUserToOrderColumns = true;
-            this.tableEmployee.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.tableEmployee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tableEmployee.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.tableCertificate.AllowUserToAddRows = false;
+            this.tableCertificate.AllowUserToDeleteRows = false;
+            this.tableCertificate.AllowUserToOrderColumns = true;
+            this.tableCertificate.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tableCertificate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableCertificate.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.UserName,
             this.Certificate,
             this.Quantity,
             this.Reason,
             this.Status});
-            this.tableEmployee.Location = new System.Drawing.Point(315, 69);
-            this.tableEmployee.Name = "tableEmployee";
-            this.tableEmployee.RowHeadersWidth = 51;
-            this.tableEmployee.RowTemplate.Height = 24;
-            this.tableEmployee.Size = new System.Drawing.Size(799, 424);
-            this.tableEmployee.TabIndex = 19;
-            // 
-            // radioButtonEmployee
-            // 
-            this.radioButtonEmployee.AutoSize = true;
-            this.radioButtonEmployee.Location = new System.Drawing.Point(15, 56);
-            this.radioButtonEmployee.Name = "radioButtonEmployee";
-            this.radioButtonEmployee.Size = new System.Drawing.Size(91, 20);
-            this.radioButtonEmployee.TabIndex = 20;
-            this.radioButtonEmployee.TabStop = true;
-            this.radioButtonEmployee.Text = "Работник";
-            this.radioButtonEmployee.UseVisualStyleBackColor = true;
-            this.radioButtonEmployee.Click += new System.EventHandler(this.RadioButtonEmployee_Click);
-            // 
-            // radioButtonAccountant
-            // 
-            this.radioButtonAccountant.AutoSize = true;
-            this.radioButtonAccountant.Location = new System.Drawing.Point(130, 56);
-            this.radioButtonAccountant.Name = "radioButtonAccountant";
-            this.radioButtonAccountant.Size = new System.Drawing.Size(96, 20);
-            this.radioButtonAccountant.TabIndex = 21;
-            this.radioButtonAccountant.TabStop = true;
-            this.radioButtonAccountant.Text = "Бухгалтер";
-            this.radioButtonAccountant.UseVisualStyleBackColor = true;
-            this.radioButtonAccountant.Click += new System.EventHandler(this.RadioButtonAccountant_Click);
-            // 
-            // buttonUpdateDate
-            // 
-            this.buttonUpdateDate.Location = new System.Drawing.Point(70, 82);
-            this.buttonUpdateDate.Name = "buttonUpdateDate";
-            this.buttonUpdateDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.buttonUpdateDate.Size = new System.Drawing.Size(169, 23);
-            this.buttonUpdateDate.TabIndex = 20;
-            this.buttonUpdateDate.Text = "Сохранить изменения";
-            this.buttonUpdateDate.UseVisualStyleBackColor = true;
-            this.buttonUpdateDate.Visible = false;
-            this.buttonUpdateDate.Click += new System.EventHandler(this.ButtonUpdateDate_Click);
+            this.tableCertificate.Location = new System.Drawing.Point(339, 43);
+            this.tableCertificate.Name = "tableCertificate";
+            this.tableCertificate.RowHeadersWidth = 51;
+            this.tableCertificate.RowTemplate.Height = 24;
+            this.tableCertificate.Size = new System.Drawing.Size(853, 450);
+            this.tableCertificate.TabIndex = 19;
             // 
             // UserName
             // 
+            this.UserName.Frozen = true;
             this.UserName.HeaderText = "ФИО";
             this.UserName.MinimumWidth = 6;
             this.UserName.Name = "UserName";
@@ -271,6 +231,7 @@
             // 
             // Certificate
             // 
+            this.Certificate.Frozen = true;
             this.Certificate.HeaderText = "Вид справки";
             this.Certificate.MinimumWidth = 6;
             this.Certificate.Name = "Certificate";
@@ -278,13 +239,15 @@
             // 
             // Quantity
             // 
+            this.Quantity.Frozen = true;
             this.Quantity.HeaderText = "Колличество";
             this.Quantity.MinimumWidth = 6;
             this.Quantity.Name = "Quantity";
-            this.Quantity.Width = 125;
+            this.Quantity.Width = 80;
             // 
             // Reason
             // 
+            this.Reason.Frozen = true;
             this.Reason.HeaderText = "Причина";
             this.Reason.MinimumWidth = 6;
             this.Reason.Name = "Reason";
@@ -301,34 +264,67 @@
             "Закрыт"});
             this.Status.MinimumWidth = 6;
             this.Status.Name = "Status";
-            this.Status.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Status.Width = 125;
+            // 
+            // radioButtonEmployee
+            // 
+            this.radioButtonEmployee.AutoSize = true;
+            this.radioButtonEmployee.Checked = true;
+            this.radioButtonEmployee.Location = new System.Drawing.Point(18, 43);
+            this.radioButtonEmployee.Name = "radioButtonEmployee";
+            this.radioButtonEmployee.Size = new System.Drawing.Size(91, 20);
+            this.radioButtonEmployee.TabIndex = 20;
+            this.radioButtonEmployee.TabStop = true;
+            this.radioButtonEmployee.Text = "Работник";
+            this.radioButtonEmployee.UseVisualStyleBackColor = true;
+            this.radioButtonEmployee.Click += new System.EventHandler(this.RadioButtonEmployee_Click);
+            // 
+            // radioButtonAccountant
+            // 
+            this.radioButtonAccountant.AutoSize = true;
+            this.radioButtonAccountant.Location = new System.Drawing.Point(133, 43);
+            this.radioButtonAccountant.Name = "radioButtonAccountant";
+            this.radioButtonAccountant.Size = new System.Drawing.Size(96, 20);
+            this.radioButtonAccountant.TabIndex = 21;
+            this.radioButtonAccountant.Text = "Бухгалтер";
+            this.radioButtonAccountant.UseVisualStyleBackColor = true;
+            this.radioButtonAccountant.Click += new System.EventHandler(this.RadioButtonAccountant_Click);
+            // 
+            // buttonUpdateDate
+            // 
+            this.buttonUpdateDate.Location = new System.Drawing.Point(70, 70);
+            this.buttonUpdateDate.Name = "buttonUpdateDate";
+            this.buttonUpdateDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.buttonUpdateDate.Size = new System.Drawing.Size(169, 23);
+            this.buttonUpdateDate.TabIndex = 20;
+            this.buttonUpdateDate.Text = "Сохранить изменения";
+            this.buttonUpdateDate.UseVisualStyleBackColor = true;
+            this.buttonUpdateDate.Visible = false;
+            this.buttonUpdateDate.Click += new System.EventHandler(this.ButtonUpdateDate_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1169, 557);
+            this.ClientSize = new System.Drawing.Size(1214, 557);
             this.Controls.Add(this.buttonUpdateDate);
             this.Controls.Add(this.radioButtonAccountant);
             this.Controls.Add(this.radioButtonEmployee);
-            this.Controls.Add(this.tableEmployee);
+            this.Controls.Add(this.tableCertificate);
             this.Controls.Add(this.groupBoxEmployee);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.buttonHelp);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountCertificate)).EndInit();
             this.groupBoxEmployee.ResumeLayout(false);
             this.groupBoxEmployee.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tableEmployee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableCertificate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button buttonHelp;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxNameUser;
         private System.Windows.Forms.Label label2;
@@ -340,7 +336,7 @@
         private System.Windows.Forms.ListBox listBoxNameCertificate;
         private System.Windows.Forms.TextBox textBoxNameCertificate;
         private System.Windows.Forms.GroupBox groupBoxEmployee;
-        private System.Windows.Forms.DataGridView tableEmployee;
+        private System.Windows.Forms.DataGridView tableCertificate;
         private System.Windows.Forms.Button buttonOpenTable;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RadioButton radioButtonEmployee;
