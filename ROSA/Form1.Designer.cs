@@ -35,21 +35,21 @@
             this.buttonRequest = new System.Windows.Forms.Button();
             this.numericUpDownCountCertificate = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBoxReason = new System.Windows.Forms.TextBox();
             this.listBoxNameCertificate = new System.Windows.Forms.ListBox();
             this.textBoxNameCertificate = new System.Windows.Forms.TextBox();
             this.groupBoxEmployee = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.buttonOpenTable = new System.Windows.Forms.Button();
             this.tableCertificate = new System.Windows.Forms.DataGridView();
+            this.radioButtonEmployee = new System.Windows.Forms.RadioButton();
+            this.radioButtonAccountant = new System.Windows.Forms.RadioButton();
+            this.buttonUpdateDate = new System.Windows.Forms.Button();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Certificate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Reason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.radioButtonEmployee = new System.Windows.Forms.RadioButton();
-            this.radioButtonAccountant = new System.Windows.Forms.RadioButton();
-            this.buttonUpdateDate = new System.Windows.Forms.Button();
+            this.textBoxReason = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountCertificate)).BeginInit();
             this.groupBoxEmployee.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableCertificate)).BeginInit();
@@ -91,7 +91,7 @@
             // 
             // buttonRequest
             // 
-            this.buttonRequest.Location = new System.Drawing.Point(72, 361);
+            this.buttonRequest.Location = new System.Drawing.Point(72, 370);
             this.buttonRequest.Name = "buttonRequest";
             this.buttonRequest.Size = new System.Drawing.Size(155, 33);
             this.buttonRequest.TabIndex = 9;
@@ -130,13 +130,6 @@
             this.label4.TabIndex = 14;
             this.label4.Text = "Количество экземпляров";
             // 
-            // textBoxReason
-            // 
-            this.textBoxReason.Location = new System.Drawing.Point(6, 295);
-            this.textBoxReason.Name = "textBoxReason";
-            this.textBoxReason.Size = new System.Drawing.Size(285, 22);
-            this.textBoxReason.TabIndex = 15;
-            // 
             // listBoxNameCertificate
             // 
             this.listBoxNameCertificate.FormattingEnabled = true;
@@ -163,6 +156,7 @@
             // 
             // groupBoxEmployee
             // 
+            this.groupBoxEmployee.Controls.Add(this.textBoxReason);
             this.groupBoxEmployee.Controls.Add(this.label5);
             this.groupBoxEmployee.Controls.Add(this.buttonOpenTable);
             this.groupBoxEmployee.Controls.Add(this.textBoxNameUser);
@@ -170,13 +164,12 @@
             this.groupBoxEmployee.Controls.Add(this.label2);
             this.groupBoxEmployee.Controls.Add(this.listBoxNameCertificate);
             this.groupBoxEmployee.Controls.Add(this.label3);
-            this.groupBoxEmployee.Controls.Add(this.textBoxReason);
             this.groupBoxEmployee.Controls.Add(this.buttonRequest);
             this.groupBoxEmployee.Controls.Add(this.label4);
             this.groupBoxEmployee.Controls.Add(this.numericUpDownCountCertificate);
-            this.groupBoxEmployee.Location = new System.Drawing.Point(12, 99);
+            this.groupBoxEmployee.Location = new System.Drawing.Point(12, 81);
             this.groupBoxEmployee.Name = "groupBoxEmployee";
-            this.groupBoxEmployee.Size = new System.Drawing.Size(321, 409);
+            this.groupBoxEmployee.Size = new System.Drawing.Size(321, 415);
             this.groupBoxEmployee.TabIndex = 18;
             this.groupBoxEmployee.TabStop = false;
             // 
@@ -221,13 +214,49 @@
             this.tableCertificate.Size = new System.Drawing.Size(853, 450);
             this.tableCertificate.TabIndex = 19;
             // 
+            // radioButtonEmployee
+            // 
+            this.radioButtonEmployee.AutoSize = true;
+            this.radioButtonEmployee.Checked = true;
+            this.radioButtonEmployee.Location = new System.Drawing.Point(18, 43);
+            this.radioButtonEmployee.Name = "radioButtonEmployee";
+            this.radioButtonEmployee.Size = new System.Drawing.Size(91, 20);
+            this.radioButtonEmployee.TabIndex = 20;
+            this.radioButtonEmployee.TabStop = true;
+            this.radioButtonEmployee.Text = "Работник";
+            this.radioButtonEmployee.UseVisualStyleBackColor = true;
+            this.radioButtonEmployee.Click += new System.EventHandler(this.RadioButtonEmployee_Click);
+            // 
+            // radioButtonAccountant
+            // 
+            this.radioButtonAccountant.AutoSize = true;
+            this.radioButtonAccountant.Location = new System.Drawing.Point(133, 43);
+            this.radioButtonAccountant.Name = "radioButtonAccountant";
+            this.radioButtonAccountant.Size = new System.Drawing.Size(96, 20);
+            this.radioButtonAccountant.TabIndex = 21;
+            this.radioButtonAccountant.Text = "Бухгалтер";
+            this.radioButtonAccountant.UseVisualStyleBackColor = true;
+            this.radioButtonAccountant.Click += new System.EventHandler(this.RadioButtonAccountant_Click);
+            // 
+            // buttonUpdateDate
+            // 
+            this.buttonUpdateDate.Location = new System.Drawing.Point(70, 81);
+            this.buttonUpdateDate.Name = "buttonUpdateDate";
+            this.buttonUpdateDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.buttonUpdateDate.Size = new System.Drawing.Size(169, 23);
+            this.buttonUpdateDate.TabIndex = 20;
+            this.buttonUpdateDate.Text = "Сохранить изменения";
+            this.buttonUpdateDate.UseVisualStyleBackColor = true;
+            this.buttonUpdateDate.Visible = false;
+            this.buttonUpdateDate.Click += new System.EventHandler(this.ButtonUpdateDate_Click);
+            // 
             // UserName
             // 
             this.UserName.Frozen = true;
             this.UserName.HeaderText = "ФИО";
             this.UserName.MinimumWidth = 6;
             this.UserName.Name = "UserName";
-            this.UserName.Width = 125;
+            this.UserName.Width = 140;
             // 
             // Certificate
             // 
@@ -256,6 +285,7 @@
             // Status
             // 
             this.Status.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.Status.Frozen = true;
             this.Status.HeaderText = "Статус";
             this.Status.Items.AddRange(new object[] {
             "Создан",
@@ -264,43 +294,14 @@
             "Закрыт"});
             this.Status.MinimumWidth = 6;
             this.Status.Name = "Status";
-            this.Status.Width = 125;
             // 
-            // radioButtonEmployee
+            // textBoxReason
             // 
-            this.radioButtonEmployee.AutoSize = true;
-            this.radioButtonEmployee.Checked = true;
-            this.radioButtonEmployee.Location = new System.Drawing.Point(18, 43);
-            this.radioButtonEmployee.Name = "radioButtonEmployee";
-            this.radioButtonEmployee.Size = new System.Drawing.Size(91, 20);
-            this.radioButtonEmployee.TabIndex = 20;
-            this.radioButtonEmployee.TabStop = true;
-            this.radioButtonEmployee.Text = "Работник";
-            this.radioButtonEmployee.UseVisualStyleBackColor = true;
-            this.radioButtonEmployee.Click += new System.EventHandler(this.RadioButtonEmployee_Click);
-            // 
-            // radioButtonAccountant
-            // 
-            this.radioButtonAccountant.AutoSize = true;
-            this.radioButtonAccountant.Location = new System.Drawing.Point(133, 43);
-            this.radioButtonAccountant.Name = "radioButtonAccountant";
-            this.radioButtonAccountant.Size = new System.Drawing.Size(96, 20);
-            this.radioButtonAccountant.TabIndex = 21;
-            this.radioButtonAccountant.Text = "Бухгалтер";
-            this.radioButtonAccountant.UseVisualStyleBackColor = true;
-            this.radioButtonAccountant.Click += new System.EventHandler(this.RadioButtonAccountant_Click);
-            // 
-            // buttonUpdateDate
-            // 
-            this.buttonUpdateDate.Location = new System.Drawing.Point(70, 70);
-            this.buttonUpdateDate.Name = "buttonUpdateDate";
-            this.buttonUpdateDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.buttonUpdateDate.Size = new System.Drawing.Size(169, 23);
-            this.buttonUpdateDate.TabIndex = 20;
-            this.buttonUpdateDate.Text = "Сохранить изменения";
-            this.buttonUpdateDate.UseVisualStyleBackColor = true;
-            this.buttonUpdateDate.Visible = false;
-            this.buttonUpdateDate.Click += new System.EventHandler(this.ButtonUpdateDate_Click);
+            this.textBoxReason.Location = new System.Drawing.Point(9, 295);
+            this.textBoxReason.Name = "textBoxReason";
+            this.textBoxReason.Size = new System.Drawing.Size(285, 60);
+            this.textBoxReason.TabIndex = 20;
+            this.textBoxReason.Text = "";
             // 
             // Form1
             // 
@@ -311,8 +312,8 @@
             this.Controls.Add(this.radioButtonAccountant);
             this.Controls.Add(this.radioButtonEmployee);
             this.Controls.Add(this.tableCertificate);
-            this.Controls.Add(this.groupBoxEmployee);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.groupBoxEmployee);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountCertificate)).EndInit();
@@ -332,7 +333,6 @@
         private System.Windows.Forms.Button buttonRequest;
         private System.Windows.Forms.NumericUpDown numericUpDownCountCertificate;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxReason;
         private System.Windows.Forms.ListBox listBoxNameCertificate;
         private System.Windows.Forms.TextBox textBoxNameCertificate;
         private System.Windows.Forms.GroupBox groupBoxEmployee;
@@ -347,6 +347,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reason;
         private System.Windows.Forms.DataGridViewComboBoxColumn Status;
+        private System.Windows.Forms.RichTextBox textBoxReason;
     }
 }
 

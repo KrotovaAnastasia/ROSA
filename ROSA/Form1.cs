@@ -21,38 +21,17 @@ namespace ROSA
             groupBoxEmployee.Visible = false;
             tableCertificate.Visible = false;
             tableCertificate.ReadOnly = true;
+            tableCertificate.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            tableCertificate.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
 
-        readonly string fileXml = "Certificate.xml";
-
-        public void AddCertificate() //Запись данных сотрудника в xml
-        {
-            //Проверка на корректное запление всех полей
-            if (!string.IsNullOrWhiteSpace(textBoxNameUser.Text) 
-                && Regex.IsMatch(textBoxNameUser.Text, @"^[а-яА-ЯёЁ]+$")
-                && !string.IsNullOrWhiteSpace(textBoxReason.Text)
-                && Regex.IsMatch(textBoxReason.Text, @"[^0-9]")
-                && listBoxNameCertificate.SelectedItem != null
-                && !string.IsNullOrWhiteSpace(textBoxNameCertificate.Text)
-                && Regex.IsMatch(textBoxNameCertificate.Text, @"[^0-9]")
-                )
-            {
-                XDocument doc = XDocument.Load(fileXml);
-                XElement root = doc.Element("UserCertificates");
-                SelectAdd(root, textBoxNameUser.Text, listBoxNameCertificate.Text,
-                    numericUpDownCountCertificate.Text, textBoxReason.Text, "Создан");
-                doc.Save(fileXml);
-                FillTable();
-                ClearEmployee();
-            }
-            else MessageBox.Show("Заполнены не все поля или заполнены некорректно");
-        }
-
-        public void FillTable() //заполнение таблицы
+        readonly string fileXml = "Certificate.xml"; //Файл для хранения запросов
+        
+        public void FillTable() //Заполнение таблицы
         {
             int flag = 0; //Флаг чтобы опредлеить есть ли в таблице хотя бы одна запись
             XDocument doc = XDocument.Load(fileXml);
-            tableCertificate.Rows.Clear();
+            tableCertificate.Rows.Clear(); 
             var certificates = from r in doc.Descendants("UserCertificate")
                                select new
                                {
@@ -65,7 +44,7 @@ namespace ROSA
             foreach (var cert in certificates)
             {
                 //Заполннеие таблицы нужного работника
-                if (radioButtonEmployee.Checked && cert.UserName == textBoxNameUser.Text)
+                if (radioButtonEmployee.Checked && cert.UserName == textBoxNameUser.Text.Trim())
                 {
                     tableCertificate.Rows.Add(cert.UserName, cert.Certificate, cert.Quantity, cert.Reason, cert.Status);
                     flag = 1;
@@ -79,14 +58,39 @@ namespace ROSA
             if (flag == 0) MessageBox.Show("Нет действующих запросов");
         }
 
-        public void UpdateData() //Обновление данных 
+        public void CreatApplication() //Создание заявки для справки 
+        {
+            //Проверка на корректное запление всех полей 
+            if (!string.IsNullOrWhiteSpace(textBoxNameUser.Text)
+                && Regex.IsMatch(textBoxNameUser.Text, @"^[а-яА-ЯёЁ]+$")
+                && !string.IsNullOrWhiteSpace(textBoxReason.Text)
+                && Regex.IsMatch(textBoxReason.Text, @"[^0-9]")
+                && listBoxNameCertificate.SelectedItem != null
+                && !string.IsNullOrWhiteSpace(textBoxNameCertificate.Text)
+                && Regex.IsMatch(textBoxNameCertificate.Text, @"[^0-9]"))
+            {
+                XDocument doc = XDocument.Load(fileXml);
+                XElement root = doc.Element("UserCertificates");
+                //Запись данных в xml
+                DataRecord(root, textBoxNameUser.Text.Trim(), listBoxNameCertificate.Text,
+                    numericUpDownCountCertificate.Text, textBoxReason.Text, "Создан");
+                doc.Save(fileXml);
+                FillTable(); //Заполнние таблицы
+                ClearEmployee(); //Очистка полей Работника
+            }
+            else MessageBox.Show("Заполнены не все поля или заполнены некорректно");
+        }
+
+        public void UpdateData() //Обновление данных после изменения статуса стправки бухгалтером 
         {
             XElement root = new XElement("UserCertificates");
             foreach (DataGridViewRow row in tableCertificate.Rows)
             {
-                if (row.IsNewRow) continue;                
-                if (String.Compare(row.Cells["Status"].Value.ToString(), "Закрыт") != 0) //Если стутус "Закрыт", то поле не сохраняется
-                    root = SelectAdd(root, row.Cells["UserName"].Value.ToString(), 
+                if (row.IsNewRow) continue;
+                //Если стутус "Закрыт", то поле не сохраняется
+                if (String.Compare(row.Cells["Status"].Value.ToString(), "Закрыт") != 0)
+                    //Запись данных в xml
+                    DataRecord(root, row.Cells["UserName"].Value.ToString(), 
                         row.Cells["Certificate"].Value.ToString(),
                         row.Cells["Quantity"].Value.ToString(),
                         row.Cells["Reason"].Value.ToString(),
@@ -94,11 +98,11 @@ namespace ROSA
             }
             XDocument doc = new XDocument(root);
             doc.Save(fileXml);
-            FillTable();
+            FillTable(); //Заполнние таблицы
         }
 
-        //Запись в xml
-        public XElement SelectAdd(XElement root, string name, 
+        //Запись данных в xml
+        public XElement DataRecord(XElement root, string name, 
             string сertificate,string quantity, string reason, string status)
         {
             root.Add(new XElement("UserCertificate",
@@ -118,10 +122,25 @@ namespace ROSA
             textBoxReason.Clear();
         }
 
-        //Кнопка отправки запроса
+        //Открытие полей для бухгатера после авторизации
+        public void OpenAccountant()
+        {
+            radioButtonAccountant.Checked = true;
+            groupBoxEmployee.Visible = false;
+            tableCertificate.ReadOnly = false;
+            tableCertificate.Visible = true;
+            buttonUpdateDate.Visible = true;
+            textBoxNameUser.Clear();
+            ClearEmployee();
+            FillTable(); 
+        }
+
+        //Методы связанные с работой форм
+
+        //Кнопка для создания запроса на подготовку справки Бухгалтеру
         private void ButtonRequest_Click(object sender, EventArgs e) 
         {
-            AddCertificate();
+            CreatApplication();
         }
 
         //Згурзить таблицу запросов для пользователя
@@ -133,7 +152,7 @@ namespace ROSA
         // Активация текстового поля "Другое"
         private void ListBoxNameCertificate_SelectedIndexChanged(object sender, EventArgs e) 
         {
-            if (listBoxNameCertificate.SelectedItems != null) //Выбрано ли пункт нудной справки
+            if (listBoxNameCertificate.SelectedItems != null) //Выбран ли пункт в поле справки
             {
                 if (listBoxNameCertificate.SelectedItem.ToString() == "Другое") //Выбрана справка "Другое"
                 {
@@ -149,7 +168,7 @@ namespace ROSA
             }
         }
 
-        //Открытие полей для работника
+        //Открытие полей для работника при нажатии на соответсвующу радиокнопку
         private void RadioButtonEmployee_Click(object sender, EventArgs e) 
         {
             groupBoxEmployee.Visible = true;
@@ -159,16 +178,12 @@ namespace ROSA
             tableCertificate.Rows.Clear();
         }
 
-        //Открытие полей для бухгалтера
+        //Открытие формы для авторизации бухгалтера при нажатии на соответсвующу радиокнопку
         private void RadioButtonAccountant_Click(object sender, EventArgs e) 
         {
-            groupBoxEmployee.Visible = false;
-            tableCertificate.ReadOnly = false;
-            tableCertificate.Visible = true;
-            buttonUpdateDate.Visible = true;
-            textBoxNameUser.Clear();
-            ClearEmployee();
-            FillTable();
+            radioButtonEmployee.Checked = true;
+            AuthorizationForm form = new AuthorizationForm(this);
+            form.ShowDialog();
         }
 
         //Запуск обновления данных по запросу через бухгалетра после обновления стутуса
