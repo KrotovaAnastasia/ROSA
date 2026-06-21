@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.IO;
 
 namespace ROSA
 {
@@ -26,7 +27,7 @@ namespace ROSA
         }
 
         readonly string fileXml = "Certificate.xml"; //Файл для хранения запросов
-        
+
         public void FillTable() //Заполнение таблицы
         {
             int flag = 0; //Флаг чтобы опредлеить есть ли в таблице хотя бы одна запись
@@ -61,18 +62,23 @@ namespace ROSA
         public void CreatApplication() //Создание заявки для справки 
         {
             //Проверка на корректное запление всех полей 
-            if (!string.IsNullOrWhiteSpace(textBoxNameUser.Text)
-                && Regex.IsMatch(textBoxNameUser.Text, @"^[а-яА-ЯёЁ]+$")
+            if (!string.IsNullOrWhiteSpace(textBoxNameUser.Text.Trim())
+                && Regex.IsMatch(textBoxNameUser.Text, @"^[а-яА-ЯёЁ ]")
                 && !string.IsNullOrWhiteSpace(textBoxReason.Text)
                 && Regex.IsMatch(textBoxReason.Text, @"[^0-9]")
                 && listBoxNameCertificate.SelectedItem != null
                 && !string.IsNullOrWhiteSpace(textBoxNameCertificate.Text)
                 && Regex.IsMatch(textBoxNameCertificate.Text, @"[^0-9]"))
             {
+                string certificat;
                 XDocument doc = XDocument.Load(fileXml);
                 XElement root = doc.Element("UserCertificates");
+                //Проверка какая справка нужна
+                if (listBoxNameCertificate.SelectedItem.ToString() == "Другое")
+                    certificat = textBoxNameCertificate.Text;
+                else certificat = listBoxNameCertificate.SelectedItem.ToString();
                 //Запись данных в xml
-                DataRecord(root, textBoxNameUser.Text.Trim(), listBoxNameCertificate.Text,
+                DataRecord(root, textBoxNameUser.Text.Trim(), certificat,
                     numericUpDownCountCertificate.Text, textBoxReason.Text, "Создан");
                 doc.Save(fileXml);
                 FillTable(); //Заполнние таблицы
@@ -146,7 +152,9 @@ namespace ROSA
         //Згурзить таблицу запросов для пользователя
         private void ButtonOpenTable_Click(object sender, EventArgs e)  
         {
-            FillTable();
+            if (!string.IsNullOrWhiteSpace(textBoxNameUser.Text))
+                FillTable();
+            else MessageBox.Show("Заполните имя пользователя");
         }
 
         // Активация текстового поля "Другое"
@@ -191,6 +199,7 @@ namespace ROSA
         {
             UpdateData();
         }
+
     }
 }
 
